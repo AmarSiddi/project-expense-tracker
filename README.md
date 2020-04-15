@@ -42,10 +42,10 @@ SignUP - POST
 http://localhost:5000/api/auth/signup
 
 {
-	"name": "Vaibhav",
-	"username" : "vai",
-	"email": "vaibhav@gmail.com",
-	"password": "somepassword"
+	"name": "user",
+	"username" : "user",
+	"email": "user@user.com",
+	"password": "user"
 }
 
 ```
@@ -56,8 +56,8 @@ SignIn - POST
 http://localhost:5000/api/auth/signin
 
 {
-	"usernameOrEmail" : "vai",
-	"password" : "somepassword"
+	"usernameOrEmail" : "user@user.com",
+	"password" : "user"
 }
 
 ```
