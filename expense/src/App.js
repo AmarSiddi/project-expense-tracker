@@ -8,7 +8,7 @@ import Home from "./Dashboard/Home";
 import ProtectedRoute from "./Utils/ProtectedRoute";
 import Category from "./Category/Category";
 import Expenses from "./Expense/Expenses";
-import AppNav from "./Utils/AppNav";
+//import AppNav from "./Utils/AppNav";
 import SignOut from "./Dashboard/SignOut"
 
 

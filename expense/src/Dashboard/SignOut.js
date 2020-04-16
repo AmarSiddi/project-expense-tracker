@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Auth from "../Utils/Auth";
+//import Auth from "../Utils/Auth";
 
 class SignOut extends Component {
   state = {};
