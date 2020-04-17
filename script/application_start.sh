@@ -1,3 +1,4 @@
+#!/bin/bash
 sudo rm -rf /var/www/ci-cd-react/build
 sudo npm run build
 forever stopall
