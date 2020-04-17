@@ -4,12 +4,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.vaibhavs.sec</groupId>
-	<artifactId>SSec</artifactId>
+	<artifactId>ExpenseTracker</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>SSec</name>
-	<description>Demo project for Spring Boot</description>
+	<name>ExpenseTracker</name>
+	<description>Spring Boot ExpenseTracker</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
