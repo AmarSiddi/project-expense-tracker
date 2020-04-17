@@ -1,5 +1,5 @@
 #!/bin/bash
-sudo rm -rf /home/ec2-user/spw/build
-sudo npm run build
+cd /home/ec2-user/spw/
+sudo npm run App
 forever stopall
 forever start -c "node -r esm" Server.js
