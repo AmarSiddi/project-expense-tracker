@@ -1,0 +1,21 @@
+version: 0.0
+os: linux
+files:
+  - source: cdk-manual-test-spring-boot-0.1.jar
+    destination: /var/cdk-app/
+hooks:
+  ApplicationStop:
+    - location: stop_server.sh
+      timeout: 300
+      runas: root
+  BeforeInstall:
+    - location: install_dependencies.sh
+      timeout: 300
+      runas: root
+    - location: create_or_update_service.sh
+      timeout: 300
+      runas: root
+  ApplicationStart:
+    - location: start_server.sh
+      timeout: 300
+      runas: root
