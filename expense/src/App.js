@@ -13,7 +13,7 @@ import SignOut from "./Dashboard/SignOut"
 
 
 export class App extends Component {
-  state = {};
+  state = { };
 
   render() {
     return (
