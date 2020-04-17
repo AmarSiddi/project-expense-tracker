@@ -1,3 +1,3 @@
 #!/bin/bash
-cd /var/www/ci-cd-react
+cd /home/ec2-user/spw
 sudo npm install
