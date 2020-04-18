@@ -1,5 +1,10 @@
 #!/bin/bash
-cd  /home/ec2-user/project/
+cd  /home/ec2-user/project
+
+sudo /home/ec2-user/project/java -jar ExpenseTracker-0.0.1-SNAPSHOT.jar
+
+#sudo killall java
+#exit 0
 
 #sudo npm update
 #sudo npm start
@@ -7,7 +12,5 @@ cd  /home/ec2-user/project/
 #forever stopall
 #forever start -c "node -r esm" Server.js
 
-#sudo killall java
-#exit 0
 
-sudo java -jar ExpenseTracker-0.0.1-SNAPSHOT.jar
+
