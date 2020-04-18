@@ -1,5 +1,5 @@
 #!/bin/bash
-cd  /home/ec2-user/project/script/
+cd  /home/ec2-user/project/
 
 #sudo npm update
 #sudo npm start
