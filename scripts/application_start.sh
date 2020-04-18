@@ -1,7 +1,7 @@
 #!/bin/bash
 cd  /home/ec2-user/project
 
-sudo /home/ec2-user/project/java -jar ExpenseTracker-0.0.1-SNAPSHOT.jar
+sudo java -jar ExpenseTracker-0.0.1-SNAPSHOT.jar
 
 #sudo killall java
 #exit 0
