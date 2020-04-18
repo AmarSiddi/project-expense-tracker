@@ -1,5 +1,5 @@
 #!/bin/bash
-cd /home/ec2-user/project/expense
+cd  /home/ec2-user/project/expense/
 
 sudo npm update
 sudo npm start
