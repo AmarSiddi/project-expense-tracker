@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.Instant;
+import java.util.Date;
 
 import javax.persistence.*;
 
@@ -17,17 +18,24 @@ import javax.persistence.*;
 public class Expense {
 
     @Id
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private Instant expenseDate;
+
     private String description;
 
     private String location;
-    @ManyToOne
+
+    //@ManyToOne(targetEntity = Category.class, cascade = CascadeType.ALL)
+    //@JoinColumn(name="category_id", referencedColumnName = "id")
+    @ManyToOne()
     private Category category;
 
-    @JsonIgnore
-    @ManyToOne
+
+    //@ManyToOne(targetEntity = User.class, cascade = CascadeType.ALL)
+    //@JoinColumn(name="user_id", referencedColumnName = "id")
+    @ManyToOne()
     private User user;
 
 }

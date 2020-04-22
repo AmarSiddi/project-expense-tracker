@@ -5,12 +5,14 @@ import java.util.Collections;
 
 import javax.validation.Valid;
 
+import com.project.expense.model.ReCaptchaResponse;
 import com.project.expense.model.Role;
 import com.project.expense.model.RoleName;
 import com.project.expense.model.User;
 import com.project.expense.repo.RoleRepo;
 import com.project.expense.security.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -18,10 +20,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.project.expense.exception.AppException;
@@ -35,6 +35,8 @@ import payloads.SignUpRequest;
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
+
+	private String message;
 
 	@Autowired
 	AuthenticationManager authenticationManager;
@@ -51,16 +53,34 @@ public class AuthController {
 	@Autowired
     JwtTokenProvider tokenProvider;
 
+	@Autowired
+	private RestTemplate restTemplate;
+
 	@PostMapping("/signin")
-	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
+	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest, @RequestParam (name="g-recaptcha-response") String captchaResponse) {
 
-		Authentication authentication = authenticationManager.authenticate(
-				new UsernamePasswordAuthenticationToken(loginRequest.getUsernameOrEmail(), loginRequest.getPassword()));
 
-		SecurityContextHolder.getContext().setAuthentication(authentication);
+		String url="https://www.google.com/recaptcha/api/siteverify";
+		String params = "?secret=6LckUuwUAAAAADzulhLmqzXvEjCtNwj3Hm7tRYyp&response="+captchaResponse;
 
-		String jwt = tokenProvider.generateToken(authentication);
-		return ResponseEntity.ok(new JwtAuthenticationResponse(jwt));
+		ReCaptchaResponse reCaptchaResponse = restTemplate.exchange(url+params, HttpMethod.POST,null,ReCaptchaResponse.class).getBody();
+
+		if(reCaptchaResponse.isSuccess()){
+			Authentication authentication = authenticationManager.authenticate(
+					new UsernamePasswordAuthenticationToken(loginRequest.getUsernameOrEmail(), loginRequest.getPassword()));
+
+			SecurityContextHolder.getContext().setAuthentication(authentication);
+
+			String jwt = tokenProvider.generateToken(authentication);
+			Long userIDJWT = tokenProvider.getUserIdFromJWT(jwt);
+
+			return ResponseEntity.ok(new JwtAuthenticationResponse(jwt, userIDJWT));
+
+		}else {
+
+			return new ResponseEntity<>(HttpStatus.NETWORK_AUTHENTICATION_REQUIRED);
+		}
+
 	}
 
 	@PostMapping("/signup")
