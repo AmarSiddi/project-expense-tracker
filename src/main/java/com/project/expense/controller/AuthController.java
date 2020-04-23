@@ -58,8 +58,6 @@ public class AuthController {
 
 	@PostMapping("/signin")
 	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest, @RequestParam (name="g-recaptcha-response") String captchaResponse) {
-
-
 		String url="https://www.google.com/recaptcha/api/siteverify";
 		String params = "?secret=6LckUuwUAAAAADzulhLmqzXvEjCtNwj3Hm7tRYyp&response="+captchaResponse;
 

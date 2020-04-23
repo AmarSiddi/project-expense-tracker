@@ -32,7 +32,7 @@ public class User {
     private String name;
 
     @NotBlank
-    @Size(max = 15)
+    @Size(min=5, max = 15)
     private String username;
 
     @NaturalId
@@ -42,7 +42,7 @@ public class User {
     private String email;
 
     @NotBlank
-    @Size(max = 100)
+    @Size(min=5, max = 100)
     private String password;
     
     @ManyToMany(fetch = FetchType.LAZY)

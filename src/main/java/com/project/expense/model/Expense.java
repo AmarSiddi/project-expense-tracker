@@ -9,12 +9,14 @@ import java.time.Instant;
 import java.util.Date;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Data
-@Table(name="expense")
+@Table(name = "expense")
 public class Expense {
 
     @Id
@@ -23,6 +25,8 @@ public class Expense {
 
     private Instant expenseDate;
 
+    @NotBlank
+    @Size(min = 3, max = 100)
     private String description;
 
     private String location;
